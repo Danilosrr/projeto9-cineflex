@@ -1,0 +1,111 @@
+*{  
+    box-sizing: border-box;
+}
+
+/* Pagina 1*/
+h1,h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.Topo{
+    position: fixed; 
+    top: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 67px;    
+    background-color: #C3CFD9;
+    color: #E8833A;
+    font-size: 34px;
+}
+
+.mensagem{
+    background-color: #FFFFFF;
+    position: fixed; 
+    top: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height:  67px;
+    font-size: 24px;
+}
+.Filmes{
+    margin-top: 134px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+}
+.Filmes .Filme{
+    margin: 10px;
+}
+
+/* Pagina 2*/
+.rodape{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    background-color: #C3CFD9;
+}
+.rodape .infoFilme{
+    margin-left: 10px;
+    height: fit-content;
+    background-color: #E8833A;
+}
+.Horarios{
+    margin-top: 134px;
+    padding: 5px;
+}
+.Horarios .horario button{
+    background-color: #E8833A;
+    color: #FFFFFF;
+    border-radius: 3px;
+    border: none;
+    width: 83px;
+    height: 43px;
+    margin: 5px;
+}
+.Horarios .horario h1{
+    margin: 20px 0;
+}
+
+/* Pagina 3*/
+.Sessao{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 134px;
+    padding: 5px;
+}
+.Sessao .assentos{
+    display: flex;
+    justify-content: center;
+}
+.Sessao .dadosCompra{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Sessao .dadosCompra *{
+    font-size: 18px;
+    margin: 5px 0;
+}
+.Sessao .dadosCompra #cpf,#comprador{
+    height: 40px;
+    width: 100%;
+}
+.Sessao .dadosCompra #confirmar{
+    margin: 0 auto;
+    background-color: #E8833A;
+    color: #FFFFFF;
+    border-radius: 3px;
+    border: none;
+    width: 83px;
+    height: 43px;
+}
