@@ -42,6 +42,10 @@ h1,h2{
 .Filmes .Filme{
     margin: 10px;
 }
+.Filmes .Filme img{
+    height: 193px;
+    width: 129px;
+}
 
 /* Pagina 2*/
 .rodape{
@@ -52,7 +56,12 @@ h1,h2{
     display: flex;
     align-items: center;
     height: fit-content;
+    padding: 5px;
     background-color: #C3CFD9;
+}
+.rodape img{
+    height: 72px;
+    width: 48px;
 }
 .rodape .infoFilme{
     margin-left: 10px;
@@ -61,6 +70,7 @@ h1,h2{
 }
 .Horarios{
     margin-top: 134px;
+    margin-bottom: 82px;
     padding: 5px;
 }
 .Horarios .horario button{

@@ -7,7 +7,7 @@ export default function Sessao(){
                     <h2>Selecione o(s) assento(s)</h2>
                 </div>
                 <div className="assentos">
-                    <img src="./imgs/imgTemporaria.png"/>
+                    <img src="./imgs/imgTemporaria.png" alt="temporario"/>
                 </div>
 
                 <section className="dadosCompra">

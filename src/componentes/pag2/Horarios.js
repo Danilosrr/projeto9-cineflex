@@ -1,23 +1,40 @@
+import axios from "axios"
+import { useState,useEffect } from "react"
+import { useParams } from 'react-router-dom';
+
 import Horario from "./Horario"
+import Rodape from "../rodape/Rodape";
 
 export default function Horarios(){
-    return(
-        <>
-            <div className="mensagem">
-                <h2>Selecione o horário</h2>
-            </div>
-            <section className="Horarios">
-                <Horario dia="quinta-feira" data="24/06"/>
-                <Horario dia="sexta-feira" data="25/06"/>
-            </section>
-            <footer className="rodape">
-                <img src="./imgs/image9.png" alt="filme selecionado"/>
-                <div className="infoFilme">
-                    <h4>Nome do filme</h4>
-                    <h4>Horario do filme</h4>
+    const[filmeSelecionado,setfilmeSelecionado] = useState(null);
+    const {filmeId} = useParams();
+    
+
+    useEffect(()=>{
+        const obterHorarios=axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${filmeId}/showtimes`)
+        obterHorarios.then(resposta=>{
+        setfilmeSelecionado(resposta.data);
+        })
+    },[filmeId])
+    
+    if(filmeSelecionado==null){
+        return(
+            <></>
+        )
+    }else{
+        const {days:dias,title:titulo,posterURL:src} = filmeSelecionado
+        console.log(dias)
+        return(
+            <>
+                <div className="mensagem">
+                    <h2>Selecione o horário</h2>
                 </div>
-            </footer>
-        </>
-        
-    )
+                <section className="Horarios">
+                    {dias.map(sessao=><Horario dia={sessao.weekday} data={sessao.date} key={sessao.id} sessoes={sessao.showtimes}/>)}
+                    
+                </section>
+                <Rodape titulo={titulo} horario="" src={src}/>
+            </>
+        )
+    }  
 }
