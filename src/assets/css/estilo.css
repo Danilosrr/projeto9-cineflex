@@ -119,3 +119,21 @@ h1,h2{
     width: 83px;
     height: 43px;
 }
+.assentos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.Assento{
+    display: flex;  
+    justify-content: center;
+    align-items: center;  
+    background-color: #C3CFD9;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    margin: 4px;
+}
+.Assento h5{
+    font-size: 11px;
+}

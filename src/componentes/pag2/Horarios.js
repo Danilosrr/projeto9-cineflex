@@ -33,7 +33,7 @@ export default function Horarios(){
                     {dias.map(sessao=><Horario dia={sessao.weekday} data={sessao.date} key={sessao.id} sessoes={sessao.showtimes}/>)}
                     
                 </section>
-                <Rodape titulo={titulo} horario="" src={src}/>
+                <Rodape titulo={titulo} horario="" dia="" src={src}/>
             </>
         )
     }  
