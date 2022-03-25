@@ -7,8 +7,12 @@ import Assento from "./Assento";
 
 
 export default function Sessao(){
-    const[sessaoSelecionada,setsessaoSelecionada] = useState(null);
     const {sessaoId} = useParams();
+
+    const[sessaoSelecionada,setsessaoSelecionada] = useState(null);
+    const[assentoSelecionado,setassentoSelecionado] = useState([]);
+    const[comprador,setComprador]=useState("")
+    const[cpf,setCpf]=useState("")
 
     useEffect(()=>{
         const obterHorarios=axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessaoId}/seats`)
@@ -17,13 +21,21 @@ export default function Sessao(){
         })
     },[sessaoId])
 
+    function EnviarPedido(event){
+        event.preventDefault();
+        const requisicao = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", {
+            ids: assentoSelecionado,
+            name: comprador,
+            cpf: cpf
+        });
+    }
+
     if(sessaoSelecionada==null){
         return(
             <></>
         )
     }else{
         const{day:dia, movie:filme,seats:assentos}=sessaoSelecionada
-        console.log(sessaoSelecionada);
         return(
             <>
                 <section className="Sessao">
@@ -32,16 +44,16 @@ export default function Sessao(){
                         <h2>Selecione o(s) assento(s)</h2>
                     </div>
                     <div className="assentos">
-                        {assentos.map(assento=><Assento numero={assento.name}/>)}
+                        {assentos.map(assento=><Assento key={assento.id} numero={assento.name} id={assento.id} disponivel={assento.isAvailable} assentoSelecionado={assentoSelecionado} funcao={setassentoSelecionado}/>)}
                     </div>
 
-                    <section className="dadosCompra">
+                    <form className="dadosCompra" onSubmit={EnviarPedido}>
                         <label>Nome do comprador:</label><br/>
-                        <input type="text" id="comprador" placeholder="Digite seu nome..."/><br/>
+                        <input type="text" id="comprador" placeholder="Digite seu nome..." value={comprador} onChange={event=>setComprador(event.target.value)} required/><br/>
                         <label>CPF do comprador:</label><br/>
-                        <input type="text" id="cpf" placeholder="Digite seu CPF..."/><br/>
+                        <input type="text" maxLength={11} id="cpf" placeholder="Digite seu CPF (apenas números)..." value={cpf} onChange={event=>setCpf(event.target.value)} required/><br/>
                         <input type="submit" id="confirmar"/>
-                    </section>
+                    </form>
                 </section>
 
                 <Rodape titulo={filme.title} horario={dia.date} dia={dia.weekday} src={filme.posterURL}/>
