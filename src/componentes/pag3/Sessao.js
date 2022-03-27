@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState,useEffect } from "react"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Rodape from "../rodape/Rodape";
 import Assento from "./Assento";
@@ -11,9 +11,12 @@ export default function Sessao(){
 
     const[sessaoSelecionada,setsessaoSelecionada] = useState(null);
     const[assentoSelecionado,setassentoSelecionado] = useState([]);
+    const[numeroAssento,setNumeroAssento] = useState([]);
     const[comprador,setComprador]=useState("")
     const[cpf,setCpf]=useState("")
 
+    let navigate = useNavigate()
+    
     useEffect(()=>{
         const obterHorarios=axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessaoId}/seats`)
         obterHorarios.then(resposta=>{
@@ -23,11 +26,32 @@ export default function Sessao(){
 
     function EnviarPedido(event){
         event.preventDefault();
-        const requisicao = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", {
-            ids: assentoSelecionado,
+
+        if(isNaN(cpf)===true){
+            return(alert("digite um cpf válido"))
+        }
+        if(assentoSelecionado.length<=1){
+            return(alert("selecione um ou mais assentos"))
+        }
+        let dadosEnviados=
+        {
+            ids:assentoSelecionado,
             name: comprador,
-            cpf: cpf
-        });
+            cpf: cpf,
+        }
+        let dadosSucesso={
+            numeros: numeroAssento,
+            nome: comprador,
+            cpf: cpf,
+            titulo: sessaoSelecionada.movie.title, 
+            data: sessaoSelecionada.day.date, 
+            dia: sessaoSelecionada.day.weekday,
+            horario:sessaoSelecionada.name
+        }
+        
+        const requisicao = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosEnviados );
+        const pedidoEfetuado=()=>{navigate("/sucesso", {state: dadosSucesso} )}
+        requisicao.then(pedidoEfetuado)
     }
 
     if(sessaoSelecionada==null){
@@ -44,7 +68,10 @@ export default function Sessao(){
                         <h2>Selecione o(s) assento(s)</h2>
                     </div>
                     <div className="assentos">
-                        {assentos.map(assento=><Assento key={assento.id} numero={assento.name} id={assento.id} disponivel={assento.isAvailable} assentoSelecionado={assentoSelecionado} funcao={setassentoSelecionado}/>)}
+                        {assentos.map(assento=><Assento key={assento.id} numero={assento.name} id={assento.id} 
+                        disponivel={assento.isAvailable} assentoSelecionado={assentoSelecionado} funcao={setassentoSelecionado}
+                        numeroAssento={numeroAssento} funcaoNum={setNumeroAssento}
+                        />)}
                     </div>
 
                     <form className="dadosCompra" onSubmit={EnviarPedido}>

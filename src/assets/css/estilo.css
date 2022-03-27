@@ -36,11 +36,11 @@ h1,h2{
     margin-top: 134px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
+    justify-content: space-around;
+    padding: 5px 20px;
 }
 .Filmes .Filme{
-    margin: 10px;
+    margin: 15px 0px;
 }
 .Filmes .Filme img{
     height: 193px;
@@ -71,7 +71,7 @@ h1,h2{
 .Horarios{
     margin-top: 134px;
     margin-bottom: 82px;
-    padding: 5px;
+    padding: 5px 20px;
 }
 .Horarios .horario button{
     background-color: #E8833A;
@@ -92,7 +92,7 @@ h1,h2{
     font-weight: 400;
     font-style: normal;
     margin-top: 134px;
-    padding: 5px;
+    padding: 5px 20px;
 }
 .Sessao .assentos{
     display: flex;
@@ -111,7 +111,7 @@ h1,h2{
     width: 100%;
 }
 .Sessao .dadosCompra #confirmar{
-    margin: 0 auto;
+    margin: 10px auto;
     background-color: #E8833A;
     color: #FFFFFF;
     border-radius: 3px;
@@ -145,4 +145,43 @@ h1,h2{
 .selecionado{
     background-color: #8DD7CF;
     border: 1px solid #45BDB0;
+}
+
+/* Pagina 4*/
+.Sucesso{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 134px;
+    padding: 5px 20px;
+}
+.Sucesso .mensagem{
+    color: #247A6B;
+    text-align: center;
+}
+.Sucesso .infoPedido{
+    margin: 20px 0px;
+}
+.Sucesso .infoPedido h3{
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.Sucesso .infoPedido p{
+    font-size: 22px ;
+    margin-bottom: 5px;
+}
+.Sucesso button{
+    margin: 0 auto;
+    background-color: #E8833A;
+    color: #FFFFFF;
+    border-radius: 3px;
+    border: none;
+    height: 43px;
+    font-size: 18px;
+}
+.retorno{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
